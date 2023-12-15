@@ -6,4 +6,5 @@ TESTING
    :caption: Contents:
 
    PHPUnit Testing <./phpunit/index.rst>
+   Behat <./behat/index.rst>
 
