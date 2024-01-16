@@ -7,4 +7,5 @@ TESTING
 
    PHPUnit Testing <./phpunit/index.rst>
    Behat <./behat/index.rst>
+   Testing Database <./testingDatabase/index.rst>
 

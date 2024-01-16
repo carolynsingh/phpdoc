@@ -10,6 +10,6 @@ Welcome to phpdoc's documentation!
    :maxdepth: 2
    :caption: Contents:
 
- PHP Mend <./phpMend/index.rst>
+   PHP Mend <./phpMend/index.rst>
 
 

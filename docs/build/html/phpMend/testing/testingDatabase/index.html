@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SETTING UP TESTING DATABASE &mdash; phpdoc  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            phpdoc
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">PHP Mend</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">phpdoc</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SETTING UP TESTING DATABASE</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/phpMend/testing/testingDatabase/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-testing-database">
+<h1>SETTING UP TESTING DATABASE<a class="headerlink" href="#setting-up-testing-database" title="Link to this heading"></a></h1>
+<p><strong>Step 1 :</strong></p>
+<p>The first step is to create a database.
+This database should be a clone of your real database, which is used by the application but should not contain any data inside the tables.</p>
+<img alt="../../../_images/img_211.png" src="../../../_images/img_211.png" />
+<p><strong>Step 2 :</strong></p>
+<p>In .env file add the following keys :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DB_TEST_HOST</span><span class="o">=</span><span class="mf">127.0.0.1</span>
+<span class="n">DB_TEST_PORT</span><span class="o">=</span><span class="mi">3306</span>
+<span class="n">DB_TEST_DATABASE</span><span class="o">=</span><span class="n">testdb</span>
+<span class="n">DB_TEST_USERNAME</span><span class="o">=</span><span class="n">root</span>
+<span class="n">DB_TEST_PASSWORD</span><span class="o">=</span><span class="n">Qwerty</span><span class="o">@</span><span class="mi">321</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Change the “Port” , “Database name” and “Password” according to your credentials.</p>
+</div>
+<p><strong>Step 3 :</strong></p>
+<p>Alter APP_ENV key in .env file :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">APP_ENV</span><span class="o">=</span><span class="n">testing</span>
+</pre></div>
+</div>
+<p><strong>Step 4 :</strong></p>
+<p>Put the below code in config/database.php :</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="x">&#39;testing&#39; =&gt; [</span>
+<span class="x">         &#39;driver&#39; =&gt; &#39;mysql&#39;,</span>
+<span class="x">         &#39;url&#39; =&gt; env(&#39;DATABASE_URL&#39;),</span>
+<span class="x">         &#39;host&#39; =&gt; env(&#39;DB_TEST_HOST&#39;, &#39;127.0.0.1&#39;),</span>
+<span class="x">         &#39;port&#39; =&gt; env(&#39;DB_TEST_PORT&#39;, &#39;3306&#39;),</span>
+<span class="x">         &#39;database&#39; =&gt; env(&#39;DB_TEST_DATABASE&#39;, &#39;forge&#39;),</span>
+<span class="x">         &#39;username&#39; =&gt; env(&#39;DB_TEST_USERNAME&#39;, &#39;forge&#39;),</span>
+<span class="x">         &#39;password&#39; =&gt; env(&#39;DB_TEST_PASSWORD&#39;, &#39;&#39;),</span>
+<span class="x">         &#39;unix_socket&#39; =&gt; env(&#39;DB_SOCKET&#39;, &#39;&#39;),</span>
+<span class="x">         &#39;charset&#39; =&gt; &#39;utf8mb4&#39;,</span>
+<span class="x">         &#39;collation&#39; =&gt; &#39;utf8mb4_unicode_ci&#39;,</span>
+<span class="x">         &#39;prefix&#39; =&gt; &#39;&#39;,</span>
+<span class="x">         &#39;prefix_indexes&#39; =&gt; true,</span>
+<span class="x">         &#39;strict&#39; =&gt; true,</span>
+<span class="x">         &#39;engine&#39; =&gt; null</span>
+<span class="x">     ],</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Put the above code just after mysql array.</p>
+</div>
+<p><strong>Step 5 :</strong></p>
+<p>Add the below code in phpunit.xml file :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">env</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;DB_CONNECTION&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;testing&quot;</span><span class="o">/&gt;</span>
+</pre></div>
+</div>
+<img alt="../../../_images/img64.png" src="../../../_images/img64.png" />
+<p><strong>Step 6 :</strong></p>
+<p>Run the command to migrate tables in the testing database :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">php</span> <span class="n">artisan</span> <span class="n">migrate</span><span class="p">:</span><span class="n">fresh</span> <span class="o">--</span><span class="n">database</span><span class="o">=</span><span class="n">testing</span> <span class="o">--</span><span class="n">seed</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, pactreon.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
