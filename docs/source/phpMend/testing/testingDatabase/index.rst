@@ -3,8 +3,12 @@ SETTING UP TESTING DATABASE
 
 **Step 1 :**
 
-The first step is to create a database.
-This database should be a clone of your real database, which is used by the application but should not contain any data inside the tables.
+Open the query console by clicking on the + icon.
+
+.. image:: images/img_3.png
+.. image:: images/img_4.png
+
+Create a dedicated and independent testing database within your existing connection as the initial step.
 
 .. image:: images/img_2.png
 
@@ -34,7 +38,7 @@ Alter APP_ENV key in .env file :
 
 **Step 4 :**
 
-Put the below code in config/database.php :
+Put the below code in config/database.php in 'connections' array :
 
 .. code-block:: php
 
@@ -55,9 +59,11 @@ Put the below code in config/database.php :
             'engine' => null
         ],
 
+.. image:: images/img_5.png
+
 .. note::
 
-   Put the above code just after mysql array.
+    Put the above code just after mysql array.
 
 **Step 5 :**
 
@@ -67,7 +73,9 @@ Add the below code in phpunit.xml file :
 
    <env name="DB_CONNECTION" value="testing"/>
 
-.. image:: images/img.png
+.. image:: images/img_1.png
+
+.. image:: images/img_6.png
 
 **Step 6 :**
 
